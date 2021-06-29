@@ -130,6 +130,7 @@
         productService.getCategoryList().then(function(res) {
 
           $scope.categories = res.data;
+          console.log(res.data);
           $scope.categories = $scope.categories.slice().sort((a, b) => b.id - a.id);
         });
       };
