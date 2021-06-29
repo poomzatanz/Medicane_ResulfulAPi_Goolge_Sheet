@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+  <script src="angular.js"></script>
   <script src="dirPaginate.js"></script>
 
   <title>ตารางยา</title>
@@ -19,7 +18,7 @@
   <link rel="stylesheet" href="assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
   <!-- Argon CSS -->
   <link rel="stylesheet" href="assets/css/argon.css" type="text/css">
-  <script src="js/angular.min.js"></script>
+ 
   <style>
     .button1 a:link {
       background-color: white;
