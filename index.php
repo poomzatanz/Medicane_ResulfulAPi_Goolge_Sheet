@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
   <!-- Argon CSS -->
   <link rel="stylesheet" href="assets/css/argon.css" type="text/css">
+  <script src="js/angular.min.js"></script>
   <style>
     .button1 a:link {
       background-color: white;
