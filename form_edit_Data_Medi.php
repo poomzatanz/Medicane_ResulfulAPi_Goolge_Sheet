@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
     <meta name="author" content="Creative Tim">
-    <title>แก้ไขข้อมูลยา</title>
+    <title>บันทึกข้อมูลยา</title>
     <!-- Favicon -->
     <link rel="icon" href="assets/img/brand/favicon.png" type="image/png">
     <!-- Fonts -->
@@ -50,40 +50,40 @@
                         <div class="card-body">
                             <?php
                             $id =  $_GET['id'];
-                            $url = 'https://script.google.com/macros/s/AKfycbxCxk8olHvDKYDksyZyIYhwmTzWwlC2KuaxEqftG0BEpK_vUtU/exec?action=selects&sheet_name=Medi'; // path to your JSON file
+                            $url = 'https://script.google.com/macros/s/AKfycbxCxk8olHvDKYDksyZyIYhwmTzWwlC2KuaxEqftG0BEpK_vUtU/exec?action=selects&sheet_name=Data_Medi'; // path to your JSON file
                             $data = file_get_contents($url); // put the contents of the file into a variable
                             $p = json_decode($data); // decode the JSON feed
                             ?>
+                            <form action="save_edit_Data_Medi.php" method="post" enctype="multipart/form-data">
 
-                            <form action="save_edit.php" method="post">
                                 <?php foreach ($p as $item) {
                                     if ($item->id == $id) {
                                 ?>
                                         <input type="hidden" name="id" value="<?php echo $item->id; ?>">
-                                        <input type="hidden" name="first_date" value="<?php echo $item->first_date; ?>">
-                                        <input type="hidden" name="last_date" value="<?php echo $item->last_date; ?>">
+                                        <input type="hidden" name="pic_old" value="<?php echo $item->pic; ?>">
                                         <div class="pl-lg-4">
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label" for="input-username">ชื่อยา</label>
-                                                        <input type="text" id="name" name="name" class="form-control" placeholder="ชื่อยา" value="<?php echo $item->name; ?>">
+                                                        <input type="text" id="name" name="name" class="form-control" value="<?php echo $item->name; ?>">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <label class="form-control-label" for="input-first-name">จำนวนยา</label>
-                                                        <input type="text" id="num" name="num" class="form-control" placeholder="จำนวนยา" value="<?php echo $item->num; ?>">
+                                                        <label class="form-control-label" for="input-first-name">ข้อมูลยา</label>
+                                                        <textarea id="data_text" name="data_text" rows="18" cols="190" placeholder="ข้อมูลยา"><?php echo $item->data_text; ?></textarea>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <label class="form-control-label" for="input-first-name">วันหมดอายุ</label>
-                                                        <input type="date" id="last_date" name="last_date" class="form-control" placeholder="วันหมดอายุ" value="<?php echo $item->last_date; ?>">
+                                                        <label class="form-control-label" for="input-first-name">รูป</label>
+                                                        <td><img src="<?php echo $item->pic; ?>" class="img-responsive" width="120" height="120"></td>
+                                                        <input type="file" name="image" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>

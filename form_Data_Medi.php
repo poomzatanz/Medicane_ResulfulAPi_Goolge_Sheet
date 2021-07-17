@@ -65,8 +65,8 @@
             <br>   
             <table>
             <tr>
-            <td> <a href="form_save.php" class="btn btn btn-neutral"><i class="fa fa-plus"></i> เพิ่มยา</a></td>
-            <td><a href="form_Data_Medi.php" class="btn btn btn-neutral"><i class="fa fa-plus"></i> ข้อมูลยา</a></td>
+            <td> <a href="form_save_Data_Medi.php" class="btn btn btn-neutral"><i class="fa fa-plus"></i> เพิ่มข้อมูลยา</a></td>
+            <td> <a href="index.php" class="btn btn btn-neutral"><i class="fa fa-plus"></i> กลับไปหน้าตารางยา</a></td>
             </tr>
             </table>
           </div>
@@ -74,54 +74,17 @@
             <table class="table align-items-center table-flush">
               <thead class="thead-light">
                 <tr>
+                  <th>รูป</th>
                   <th>ชื่อยา</th>
-                  <th>จำนวน</th>
-                  <th>วันหมดอายุ</th>
-                  <th>สถานะ</th>
                   <th>การทํางาน</th>
                 </tr>
               </thead>
               <tbody class="list">
-
-                <?php
-                $url = 'https://script.google.com/macros/s/AKfycbxCxk8olHvDKYDksyZyIYhwmTzWwlC2KuaxEqftG0BEpK_vUtU/exec?action=selects&sheet_name=Medi'; // path to your JSON file
-                $data = file_get_contents($url);
-                $p = json_decode($data);
-                $status = "";
-                $today = date("Y-m-d");
-                foreach ($p as $item) {
-                  $last =  strtotime($item->last_date);
-                  $last_date01 = date('ํY-m-d', strtotime('-6 month', $last));
-                  if ($last_date01 >= $today) {
-                    $status = "ใกล้หมดอายุ";
-                  } else if ($item->last_date >= $today) {
-                    $status = "หมดอายุ";
-                  } else {
-                    $status = "ใช้งาน";
-                  }
-                  $url01 = 'https://script.google.com/macros/s/AKfycbxCxk8olHvDKYDksyZyIYhwmTzWwlC2KuaxEqftG0BEpK_vUtU/exec?action=edit&sheet_name=Medi';
-                  $data01 = array('id' => $item->id ,'name' => $item->name ,'status' => $status, 'last_date' => $item->last_date, 'num' => $item->num);
-                  $datas = json_encode($data01);
-                  $options = array(
-                    'http' => array(
-                      'header'  => "Content-type: application/json",
-                      'method'  => 'POST',
-                      'content' => ($datas)
-                    )
-                  );
-                  $context  = stream_context_create($options);
-                  $result = file_get_contents($url01, false, $context);
-                }
-                ?>
                 <tr dir-paginate="p in categories|itemsPerPage:5" pagination-id="cust">
-                  <td>@{p.name}</td>
-                  <td>@{p.num }</td>
-                  <td>@{p.last_date | date:'dd-MM-yyyy'}</td>
-                  <td ng-style="p.status === 'ใช้งาน' && {'color': 'green','font-size': 'large','font-weight':'bolder'} ||
-                  p.status === 'หมดอายุ' && {'color': 'red','font-size': 'large','font-weight':'bolder'} ||
-                  p.status === 'ใกล้หมดอายุ' && {'color': 'orange','font-size': 'large','font-weight':'bolder'}">@{p.status}</td>
-                  <td><a href="form_edit.php?id=@{p.id}" class="btn btn-info"><i class="fa fa-edit"></i> แก้ไข</a>
-                    <a href="delete.php?id=@{p.id}" class="btn btn-danger btn-delete"><i class="fa fa-trash"></i> ลบ</a>
+                  <td><img ng-src = "@{p.pic}" class="img-responsive" width="120" height="120"></td>
+                  <td> <a href="data.php?name=@{p.name}">@{p.name }</a></td>
+                  <td><a href="form_edit_Data_Medi.php?id=@{p.id}" class="btn btn-info"><i class="fa fa-edit"></i> แก้ไข</a>
+                    <a href="delete_Data_Medi.php?id=@{p.id}" class="btn btn-danger btn-delete"><i class="fa fa-trash"></i> ลบ</a>
                   </td>
                 </tr>
               </tbody>
@@ -153,7 +116,7 @@
     });
     app.service('productService', function($http) {
       this.getCategoryList = function() {
-        return $http.get('https://script.google.com/macros/s/AKfycbxCxk8olHvDKYDksyZyIYhwmTzWwlC2KuaxEqftG0BEpK_vUtU/exec?action=selects&sheet_name=Medi');
+        return $http.get('https://script.google.com/macros/s/AKfycbxCxk8olHvDKYDksyZyIYhwmTzWwlC2KuaxEqftG0BEpK_vUtU/exec?action=selects&sheet_name=Data_Medi');
       };
 
     });

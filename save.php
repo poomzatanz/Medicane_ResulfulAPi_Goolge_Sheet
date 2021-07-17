@@ -1,15 +1,15 @@
 <?php
 $name = $_POST['name'];
 $num = $_POST['num'];
+$last_date = $_POST['last_date'];
+$status = "ใช้งาน";
 
-$first_date = date('d-m-Y');
-$today =  strtotime(date('d-m-Y'));
-$today01 =  strtotime(date('d-m-Y'));
-$last_date = date('d-m-Y',strtotime('+6 month 543 year', $today));
-$first_date = date('d-m-Y',strtotime('543 year', $today01));
+$today =  strtotime($last_date);
+$last_date01 = date('ํY-m-d',strtotime('-6 month', $today));
+
 $url = 'https://script.google.com/macros/s/AKfycbxCxk8olHvDKYDksyZyIYhwmTzWwlC2KuaxEqftG0BEpK_vUtU/exec?action=insert&sheet_name=Medi';
 
-$data = array('name' => $name ,'first_date' => $first_date, 'last_date' => $last_date, 'num' => $num);
+$data = array('name' => $name ,'status' => $status, 'last_date' => $last_date, 'num' => $num);
 $datas = json_encode($data);
  
 $options = array(

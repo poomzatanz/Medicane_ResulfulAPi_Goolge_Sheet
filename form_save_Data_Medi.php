@@ -48,7 +48,7 @@
               </div>
             </div>
             <div class="card-body">
-              <form action="save.php" method="post">
+              <form action="save_Data_Medi.php" method="post" enctype="multipart/form-data">
                 <div class="pl-lg-4">
                   <div class="row">
                     <div class="col-lg-6">
@@ -61,16 +61,16 @@
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-first-name">จำนวนยา</label>
-                        <input type="text" id="num" name="num" class="form-control" placeholder="จำนวนยา" >
+                        <label class="form-control-label" for="input-first-name">ข้อมูลยา</label>
+                        <textarea id="data_text" name="data_text"  rows="18" cols="190"placeholder="ข้อมูลยา"></textarea>
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-first-name">วันหมดอายุ</label>
-                        <input type="date" id="last_date" name="last_date" class="form-control" placeholder="จำนวนยา" >
+                        <label class="form-control-label" for="input-first-name">รูป</label>               
+                        <input type="file" name="image" class="form-control">
                       </div>
                     </div>
                   </div>
