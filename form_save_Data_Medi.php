@@ -69,8 +69,7 @@
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-first-name">รูป</label>               
-                        <input type="file" name="image" class="form-control">
+                        <input type="text" id="pic" name="pic" class="form-control" placeholder="ลิ้งรูป">
                       </div>
                     </div>
                   </div>

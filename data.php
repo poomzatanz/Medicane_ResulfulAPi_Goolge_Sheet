@@ -22,12 +22,14 @@
 
     <?php
     $name =  $_GET['name'];
+    $chek = 0;
     $url = 'https://script.google.com/macros/s/AKfycbxCxk8olHvDKYDksyZyIYhwmTzWwlC2KuaxEqftG0BEpK_vUtU/exec?action=selects&sheet_name=Data_Medi'; // path to your JSON file
     $data = file_get_contents($url); // put the contents of the file into a variable
     $p = json_decode($data); // decode the JSON feed
     ?>
     <?php foreach ($p as $item) {
         if ($item->name == $name) {
+            $chek = 1;
     ?>
             <div class="main-content" id="panel">
                 <div class="header pb-6 d-flex align-items-center" style="min-height: 300px; background-image: url(../assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
@@ -59,7 +61,7 @@
 
                                 <div class="card-body">
                                     <div class="pl-lg-4">
-                                        <img src="<?php echo $item->pic; ?>" class="img-responsive" width="300" height="300">
+                                        <img src="https://drive.google.com/thumbnail?id=<?php echo $item->pic; ?>" class="img-responsive" width="300" height="300">
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="form-group">
@@ -78,10 +80,8 @@
                                         </div>
                                     </div>
                             <?php
-                        } else {
-                            echo "<h1 style='color:red; font-size: 500%; text-align: center;'>ไม่มีชื่อยานี้</h1>";
-                        }
-                    }
+                             }
+                            }
                             ?>
 
                                 </div>
@@ -108,3 +108,8 @@
 </body>
 
 </html>
+<?php
+  if($chek == 0) {
+    echo "<script langquage='javascript'>  window.location='error.php'; </script>";
+}
+?>

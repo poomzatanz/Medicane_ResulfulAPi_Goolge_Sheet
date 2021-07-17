@@ -80,14 +80,16 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label class="form-control-label" for="input-first-name">รูป</label>
-                                                        <td><img src="<?php echo $item->pic; ?>" class="img-responsive" width="120" height="120"></td>
-                                                        <input type="file" name="image" class="form-control">
+                                                
+                                                <img src = "https://drive.google.com/thumbnail?id=<?php echo $item->pic; ?>" class="img-responsive" width="120" height="120">
+                                                    <div class="form-group">     
+                                                    <p></p>                         
+                                                        <input type="text" id="pic" name="pic" class="form-control" value="<?php echo "https://drive.google.com/file/d/".$item->pic."/view?usp=sharing"; ?>">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                  
                                 <?php
                                     }
                                 }

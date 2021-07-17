@@ -81,7 +81,7 @@
               </thead>
               <tbody class="list">
                 <tr dir-paginate="p in categories|itemsPerPage:5" pagination-id="cust">
-                  <td><img ng-src = "@{p.pic}" class="img-responsive" width="120" height="120"></td>
+                  <td><img ng-src = "https://drive.google.com/thumbnail?id=@{p.pic}" class="img-responsive" width="120" height="120"></td>
                   <td> <a href="data.php?name=@{p.name}">@{p.name }</a></td>
                   <td><a href="form_edit_Data_Medi.php?id=@{p.id}" class="btn btn-info"><i class="fa fa-edit"></i> แก้ไข</a>
                     <a href="delete_Data_Medi.php?id=@{p.id}" class="btn btn-danger btn-delete"><i class="fa fa-trash"></i> ลบ</a>
