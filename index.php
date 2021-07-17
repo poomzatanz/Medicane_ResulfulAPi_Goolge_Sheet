@@ -62,12 +62,12 @@
         <div class="card">
           <div class="card-header border-0">
             <h1 class="mb-0">ตารางยา</h1>
-            <br>   
+            <br>
             <table>
-            <tr>
-            <td> <a href="form_save.php" class="btn btn btn-neutral"><i class="fa fa-plus"></i> เพิ่มยา</a></td>
-            <td><a href="form_Data_Medi.php" class="btn btn btn-neutral"><i class="fa fa-plus"></i> ข้อมูลยา</a></td>
-            </tr>
+              <tr>
+                <td> <a href="form_save.php" class="btn btn btn-neutral"><i class="fa fa-plus"></i> เพิ่มยา</a></td>
+                <td><a href="form_Data_Medi.php" class="btn btn btn-neutral"><i class="fa fa-plus"></i> ข้อมูลยา</a></td>
+              </tr>
             </table>
           </div>
           <div class="table-responsive" ng-app="app" ng-controller="ctrl">
@@ -100,7 +100,7 @@
                     $status = "ใช้งาน";
                   }
                   $url01 = 'https://script.google.com/macros/s/AKfycbxCxk8olHvDKYDksyZyIYhwmTzWwlC2KuaxEqftG0BEpK_vUtU/exec?action=edit&sheet_name=Medi';
-                  $data01 = array('id' => $item->id ,'name' => $item->name ,'status' => $status, 'last_date' => $item->last_date, 'num' => $item->num);
+                  $data01 = array('id' => $item->id, 'name' => $item->name, 'status' => $status, 'last_date' => $item->last_date, 'num' => $item->num);
                   $datas = json_encode($data01);
                   $options = array(
                     'http' => array(
@@ -114,7 +114,7 @@
                 }
                 ?>
                 <tr dir-paginate="p in categories|itemsPerPage:5" pagination-id="cust">
-                  <td>@{p.name}</td>
+                  <td> <a href="data.php?name=@{p.name}">@{p.name }</a></td>
                   <td>@{p.num }</td>
                   <td>@{p.last_date | date:'dd-MM-yyyy'}</td>
                   <td ng-style="p.status === 'ใช้งาน' && {'color': 'green','font-size': 'large','font-weight':'bolder'} ||
