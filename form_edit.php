@@ -91,7 +91,7 @@
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label" for="input-first-name">วันหมดอายุ</label>
-                                                        <input type="date" id="last_date" name="last_date" class="form-control" placeholder="วันหมดอายุ" value="<?php echo $item->last_date; ?>">
+                                                        <input type="date" id="last_date" name="last_date" class="form-control" placeholder="วันหมดอายุ" value="<?php echo strftime('%Y-%m-%d', strtotime($item->last_date)); ?>">
                                                     </div>
                                                 </div>
                                             </div>
