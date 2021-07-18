@@ -61,8 +61,16 @@
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-first-name">จำนวนยา</label>
-                        <input type="text" id="num" name="num" class="form-control" placeholder="จำนวนยา" >
+                        <label class="form-control-label" for="input-first-name">จำนวนยาใน stock</label>
+                        <input type="text" id="num_stock" name="num_stock" class="form-control" placeholder="จำนวนยา" >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-first-name">จำนวนยาที่มีอยู่จริง</label>
+                        <input type="text" id="num_real" name="num_real" class="form-control" placeholder="จำนวนยา" >
                       </div>
                     </div>
                   </div>

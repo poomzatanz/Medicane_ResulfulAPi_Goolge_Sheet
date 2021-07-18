@@ -78,6 +78,8 @@
                   <th>จำนวน</th>
                   <th>วันหมดอายุ</th>
                   <th>สถานะ</th>
+                  <th>จำนวน stock</th>
+                  <th>จำนวนที่มีอยู่จริง</th>
                   <th>การทํางาน</th>
                 </tr>
               </thead>
@@ -95,6 +97,8 @@
                   <td ng-style="p.status === 'ใช้งาน' && {'color': 'green','font-size': 'large','font-weight':'bolder'} ||
                   p.status === 'หมดอายุ' && {'color': 'red','font-size': 'large','font-weight':'bolder'} ||
                   p.status === 'ใกล้หมดอายุ' && {'color': 'orange','font-size': 'large','font-weight':'bolder'}">@{p.status}</td>
+                  <td>@{p.num_stock}</td>
+                  <td>@{p.num_real}</td>
                   <td><a href="form_edit.php?id=@{p.id}" class="btn btn-info"><i class="fa fa-edit"></i> แก้ไข</a>
                     <a href="delete.php?id=@{p.id}" class="btn btn-danger btn-delete"><i class="fa fa-trash"></i> ลบ</a>
                   </td>
