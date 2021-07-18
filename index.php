@@ -135,7 +135,7 @@
 
           $scope.categories = res.data;
 
-          $scope.categories = $scope.categories.slice().sort((a, b) => b.id - a.id);
+         
           
           for (let i = 0; i < $scope.categories.length; i++) {
             var last = new Date($scope.categories[i].last_date);
@@ -143,11 +143,23 @@
             var date = new Date();
             var last1 = new Date($scope.categories[i].last_date);
             if(last_six > date && last1 > date){
-              $scope.categories[i].status = "ใช้งาน";
+              $scope.categories[i].status = 1;
             }else if(last1 >= date && last_six <= date){
-              $scope.categories[i].status = "ใกล้หมดอายุ";
+              $scope.categories[i].status = 2;
             }else{
-              $scope.categories[i].status = "หมดอายุ";
+              $scope.categories[i].status = 3;
+            }
+         
+          }
+          $scope.categories = $scope.categories.slice().sort((a, b) => b.status - a.status);
+
+          for (let i = 0; i < $scope.categories.length; i++) {
+            if($scope.categories[i].status == 1){
+              $scope.categories[i].status = 'ใช้งาน';
+            }else if($scope.categories[i].status == 2){
+              $scope.categories[i].status = 'ใกล้หมดอายุ';
+            }else if($scope.categories[i].status == 3){
+              $scope.categories[i].status = 'หมดอายุ';
             }
          
           }
