@@ -71,13 +71,12 @@
             </table>
           </div>
           <div class="table-responsive" ng-app="app" ng-controller="ctrl">
-            <table class="table align-items-center table-flush">
+            <table class="table align-items-center table-flush" id="myTable">
               <thead class="thead-light">
                 <tr>
-                  <th>ชื่อยา</th>
-                  <th>จำนวน</th>
-                  <th>วันหมดอายุ</th>
-                  <th>สถานะ</th>
+                  <th onclick="sortTable(0)">ชื่อยา</th>
+                  <th onclick="sortTable()">วันหมดอายุ</th>
+                  <th onclick="sortTable(2)">สถานะ</th>
                   <th>จำนวน stock</th>
                   <th>จำนวนที่มีอยู่จริง</th>
                   <th>การทํางาน</th>
@@ -90,9 +89,8 @@
 
 
                 ?>
-                <tr dir-paginate="p in categories|itemsPerPage:5" pagination-id="cust">
+                <tr dir-paginate="p in categories|itemsPerPage:50" pagination-id="cust">
                   <td> <a href="data.php?name=@{p.name}">@{p.name }</a></td>
-                  <td>@{p.num }</td>
                   <td>@{p.last_date | date:'dd-MM-yyyy'}</td>
                   <td ng-style="p.status === 'ใช้งาน' && {'color': 'green','font-size': 'large','font-weight':'bolder'} ||
                   p.status === 'หมดอายุ' && {'color': 'red','font-size': 'large','font-weight':'bolder'} ||
@@ -117,7 +115,84 @@
       </div>
     </div>
   </div>
+
+  <script>
+   
+
+    function sortTable(n) {
+      var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+      table = document.getElementById("myTable");
+      switching = true;
+      //Set the sorting direction to ascending:
+      dir = "asc";
+      /*Make a loop that will continue until
+      no switching has been done:*/
+      while (switching) {
+        //start by saying: no switching is done:
+        switching = false;
+        rows = table.rows;
+        /*Loop through all table rows (except the
+        first, which contains table headers):*/
+        for (i = 1; i < (rows.length - 1); i++) {
+          //start by saying there should be no switching:
+          shouldSwitch = false;
+          /*Get the two elements you want to compare,
+          one from current row and one from the next:*/
+          x = rows[i].getElementsByTagName("TD")[n];
+          y = rows[i + 1].getElementsByTagName("TD")[n];
+          /*check if the two rows should switch place,
+          based on the direction, asc or desc:*/
+          if (dir == "asc") {
+            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+              //if so, mark as a switch and break the loop:
+              shouldSwitch = true;
+              break;
+            }
+          } else if (dir == "desc") {
+            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+              //if so, mark as a switch and break the loop:
+              shouldSwitch = true;
+              break;
+            }
+          }
+        }
+        if (shouldSwitch) {
+          /*If a switch has been marked, make the switch
+          and mark that a switch has been done:*/
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
+          //Each time a switch is done, increase this count by 1:
+          switchcount++;
+        } else {
+          /*If no switching has been done AND the direction is "asc",
+          set the direction to "desc" and run the while loop again.*/
+          if (switchcount == 0 && dir == "asc") {
+            dir = "desc";
+            switching = true;
+          }
+        }
+      }
+    }
+  </script>
   <script type="text/javascript">
+    function convertDate(d) {
+      var p = d.split("-");
+      return +(p[2] + p[1] + p[0]);
+    }
+
+    function sortByDate() {
+      var tbody = document.querySelector("#results tbody");
+      // get trs as array for ease of use
+      var rows = [].slice.call(tbody.querySelectorAll("tr"));
+
+      rows.sort(function(a, b) {
+        return convertDate(a.cells[0].innerHTML) - convertDate(b.cells[0].innerHTML);
+      });
+
+      rows.forEach(function(v) {
+        tbody.appendChild(v); // note that .appendChild() *moves* elements
+      });
+    }
     var app = angular.module('app', ['angularUtils.directives.dirPagination']).config(function($interpolateProvider) {
       $interpolateProvider.startSymbol('@{').endSymbol('}');
     });
@@ -135,33 +210,33 @@
 
           $scope.categories = res.data;
 
-         
-          
+
+
           for (let i = 0; i < $scope.categories.length; i++) {
             var last = new Date($scope.categories[i].last_date);
-            var last_six  = new Date(last.setMonth(last.getMonth()-6));
+            var last_six = new Date(last.setMonth(last.getMonth() - 6));
             var date = new Date();
             var last1 = new Date($scope.categories[i].last_date);
-            if(last_six > date && last1 > date){
+            if (last_six > date && last1 > date) {
               $scope.categories[i].status = 1;
-            }else if(last1 >= date && last_six <= date){
+            } else if (last1 >= date && last_six <= date) {
               $scope.categories[i].status = 2;
-            }else{
+            } else {
               $scope.categories[i].status = 3;
             }
-         
+
           }
           $scope.categories = $scope.categories.slice().sort((a, b) => b.status - a.status);
 
           for (let i = 0; i < $scope.categories.length; i++) {
-            if($scope.categories[i].status == 1){
+            if ($scope.categories[i].status == 1) {
               $scope.categories[i].status = 'ใช้งาน';
-            }else if($scope.categories[i].status == 2){
+            } else if ($scope.categories[i].status == 2) {
               $scope.categories[i].status = 'ใกล้หมดอายุ';
-            }else if($scope.categories[i].status == 3){
+            } else if ($scope.categories[i].status == 3) {
               $scope.categories[i].status = 'หมดอายุ';
             }
-         
+
           }
         });
       };
